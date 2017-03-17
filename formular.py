@@ -2,12 +2,14 @@ class Formular (object):
     
     def __init__(self, P, S, N , I):
 
-        self.P = float(P)
-        self.S = float(S)
+        self.P = P
+        self.S = S
         self.N = N
-        self.I = float(I)
+        self.I = I
   
     def straightLine(self):
+
+        print self.tableHeader('STRAIGHT LINE')
 
         dc = ((self.P - self.S) / self.N)
 
@@ -23,11 +25,12 @@ class Formular (object):
 
             bv = self.P - (n * dc)
 
-            print n, round(dc,1), round(accumulated,1), round(bv,1)
+            print self.table(n, round(dc,1), round(accumulated,1), round(bv,1))
 
-        print "\n straightline ================== \n"
     
     def diminishing(self):
+
+        print self.tableHeader('DIMINISHING')
 
         ct = (1 - ( self.S / self.P ) ** ( 1 / float(self.N) ) )
 
@@ -49,13 +52,13 @@ class Formular (object):
 
             accumulated += dc
 
-            print n, round(dc, 1) , round(accumulated,1) , round(bv, 1)
+            print self.table(n, round(dc,1), round(accumulated,1), round(bv,1))
 
             P = bv
 
-        print "\n Diminishing======================= \n"
-
     def sinking(self):
+
+        print self.tableHeader('SINKING')
 
         f1 = self.P - self.S
         f2 = self.I /  ((( 1 + self.I) ** self.N ) - 1)
@@ -81,39 +84,17 @@ class Formular (object):
 
             accumulated += dc
 
-            print n , round(dc, 1), round(accumulated, 1), round(bv, 1)
+            print self.table(n, round(dc,1), round(accumulated,1), round(bv,1))
 
-        print "\n Sinking======================== \n"
+    def tableHeader(self, title):
 
-    # def table(self, header1, header2, header3):
+        header = """\t \t \t \t +------+---------------+-------------------+--------------+
+                                 | Time | Depriciation  |  Accumulated Dep  |  Book Value  |
+                                 +------+---------------+-------------------+--------------+"""
 
-    #     def box (content):
-    #         return  """
-    #           +--------------+
-    #           |   content    |
-    #           +--------------+
-    #           """
+        return "\n  \n \t \t \t \t \t \t \t "+ title + "\n " + header
 
-    #     for i in numbers:
-    #         print box(numbers(i));
+    def table(self, time, dc, accumulated, bv):
 
-if __name__ == '__main__':
-
-    def input():
-
-        print "\n =========================== WELCOME TO SAGAT CALCULATOR :D ========================= \n"
-
-        S = raw_input("Input for S: ")
-        P = raw_input("Input for P: ")
-        N = raw_input("Input for N: ")
-        I = raw_input("Input for I: ")
-
-        return dict(S=S, P=P, N=N, I=I)
-
-    inp = input()
-
-    Sagat = Formular(inp['S'], inp['P'], inp['N'], int(inp['I']))
-
-    Sagat.straightLine()
-    Sagat.diminishing()
-    Sagat.sinking()
+        return """\t \t \t \t |  """  + str(time).zfill(2).center(2)+  """  |  """ + str(dc).center(11) + """  |  """ + str(accumulated).center(15) + """  |  """ + str(bv).center(10) + """  |
+                                 ----------------------------------------------------------- """
