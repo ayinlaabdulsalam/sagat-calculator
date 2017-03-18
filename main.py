@@ -29,7 +29,7 @@ if __name__ == '__main__':
 
     inp = input()
 
-    Sagat = Formular(inp['S'], inp['P'], inp['N'], inp['I'])
+    Sagat = Formular(inp['P'], inp['S'], inp['N'], inp['I'])
 
     if (meth == 'A'):
 
